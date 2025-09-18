@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard — Civic Issue Warrior</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #0077b6;
+      color: #fff;
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .leaderboard {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .leaderboard h2 {
+      color: #0077b6;
+      margin-bottom: 20px;
+    }
+
+    .leaderboard ol {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .leaderboard li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 1.1rem;
+    }
+
+    .leaderboard li:nth-child(1) { color: gold; font-weight: bold; }
+    .leaderboard li:nth-child(2) { color: silver; font-weight: bold; }
+    .leaderboard li:nth-child(3) { color: #cd7f32; font-weight: bold; }
+
+    .your-rank {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #0077b6;
+    }
+
+    .back-btn {
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .back-btn a {
+      display: inline-block;
+      text-decoration: none;
+      background: #0077b6;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .back-btn a:hover {
+      background: #005f87;
+      transform: scale(1.05);
+    }
+
+    .back-btn a:active {
+      background: #004466;
+      transform: scale(0.98);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏆 Leaderboard</h1>
+  </header>
+
+  <div class="leaderboard">
+    <h2>Top Reporters</h2>
+    <ol id="top-reporters">
+      <!-- Dummy data -->
+      <li>Akshat Kumar — 45 reports</li>
+      <li>Shreyas Verma — 38 reports</li>
+      <li>Abhishek Kumar — 25 reports</li>
+      <li>Gaurav Murli — 20 reports</li>
+      <li>Kshitj Dongre — 18 reports</li>
+      <li>Aishwarya — 15 reports</li>
+    </ol>
+    <div class="your-rank">
+      Your Rank: #7 (12 reports)
+    </div>
+  </div>
+
+  <div class="back-btn">
+    <a href="home.html">⬅ Back to Home</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crowd Civic-Sourced Issue Resolution — Feedback Form</title>
+  <style>
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --accent:#2563eb; --muted:#6b7280; --success:#059669;
+      --radius:12px; --pad:18px; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#eef2ff);padding:32px;display:flex;align-items:center;justify-content:center;min-height:100vh}
+    .card{background:var(--card);width:100%;max-width:760px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(18,38,63,0.08);padding:24px}
+    h1{margin:0 0 8px;font-size:20px}
+    p.lead{margin:0 0 18px;color:var(--muted);font-size:14px}
+
+    form .row{display:flex;gap:12px;margin-bottom:12px}
+    .col{flex:1}
+    label{display:block;font-size:13px;color:#111827;margin-bottom:6px}
+    input[type="text"], input[type="email"], textarea, select{width:100%;padding:10px 12px;border:1px solid #e6e9ef;border-radius:8px;background:#fff;font-size:14px}
+    textarea{min-height:100px;resize:vertical}
+    .small{font-size:13px;color:var(--muted)}
+
+    .radios{display:flex;gap:12px;flex-wrap:wrap}
+    .radio{display:flex;align-items:center;gap:8px;background:#fbfdff;border:1px solid #eef2f8;padding:8px 10px;border-radius:8px}
+
+    .stars {display:flex;gap:5px;cursor:pointer;font-size:22px;margin:6px 0 14px;color:#d1d5db}
+    .stars span.active {color:#fbbf24}
+
+    .checkbox{display:flex;align-items:center;gap:10px}
+    .actions{display:flex;gap:12px;align-items:center;margin-top:16px}
+    button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+    button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+    .note{font-size:13px;color:var(--muted)}
+
+    .hidden{display:none}
+    footer{margin-top:14px;font-size:13px;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:560px){.row{flex-direction:column}}
+
+    /* simple accessible focus */
+    input:focus, textarea:focus, button:focus{outline:3px solid rgba(37,99,235,0.12);outline-offset:2px}
+
+    /* success message */
+    .toast{display:none;padding:12px;border-radius:10px;background:linear-gradient(90deg,#ecfdf5,#f0f9ff);border:1px solid #d1fae5;color:var(--success);margin-top:10px}
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <h1>Crowd Civic-Sourced — Citizen Feedback</h1>
+    <p class="lead">Tell us whether your reported issue (Issue Name) was resolved and whether any further updates are required.</p>
+
+    <form id="feedbackForm" novalidate>
+      <div class="row">
+        <div class="col">
+          <label for="issueName">Issue Name</label>
+          <input id="issueName" name="issueName" type="text" placeholder="E.g. Pothole near Main Street" required>
+        </div>
+        <div style="width:160px">
+          <label for="date">Date</label>
+          <input id="date" name="date" type="text" readonly>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="name">Name (optional)</label>
+          <input id="name" name="name" type="text" placeholder="Your name">
+        </div>
+        <div style="width:220px">
+          <label for="contact">Contact (optional)</label>
+          <input id="contact" name="contact" type="text" placeholder="Phone or email">
+        </div>
+      </div>
+
+      <label>1. Was your issue resolved?</label>
+      <div class="radios" role="radiogroup" aria-labelledby="resolvedLabel">
+        <label class="radio"><input type="radio" name="resolved" value="yes" required> Yes, fully resolved</label>
+        <label class="radio"><input type="radio" name="resolved" value="partial"> Partially resolved</label>
+        <label class="radio"><input type="radio" name="resolved" value="no"> Not resolved</label>
+      </div>
+
+      <label style="margin-top:12px">2. How satisfied are you with the resolution?</label>
+      <div class="stars" id="starRating">
+        <span data-value="1">★</span>
+        <span data-value="2">★</span>
+        <span data-value="3">★</span>
+        <span data-value="4">★</span>
+        <span data-value="5">★</span>
+      </div>
+      <input type="hidden" id="satisfaction" name="satisfaction">
+
+      <div style="margin-top:12px">
+        <label class="checkbox"><input id="needsUpdate" type="checkbox"> 3. Do you think further updates are required?</label>
+      </div>
+
+      <div id="updateSection" class="hidden" style="margin-top:10px">
+        <label for="updates">If yes, what updates are needed?</label>
+        <textarea id="updates" name="updates" placeholder="Describe the update(s) required (location, time, what to fix)" maxlength="800"></textarea>
+      </div>
+
+      <div style="margin-top:12px">
+        <label for="comments">4. Any additional comments or suggestions</label>
+        <textarea id="comments" name="comments" placeholder="Share anything else that can help" maxlength="1000"></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="submit">Submit Feedback</button>
+        <button type="button" class="secondary" id="clearBtn">Clear</button>
+        <div class="note">Fields marked required: Issue Name and whether resolved.</div>
+      </div>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    </form>
+ <button onclick="window.location.href='home.html'">Back to home</button>
+    <footer>Thank you for participating — your feedback helps improve civic services.</footer>
+  </main>
+
+  <script>
+    // Auto-fill date
+    document.getElementById('date').value = new Date().toLocaleDateString();
+
+    const needsUpdate = document.getElementById('needsUpdate');
+    const updateSection = document.getElementById('updateSection');
+    needsUpdate.addEventListener('change', ()=>{
+      updateSection.classList.toggle('hidden', !needsUpdate.checked);
+      if(!needsUpdate.checked) document.getElementById('updates').value = '';
+    });
+
+    // Star rating functionality
+    const stars = document.querySelectorAll('#starRating span');
+    const satisfactionInput = document.getElementById('satisfaction');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const value = star.getAttribute('data-value');
+        satisfactionInput.value = value;
+        stars.forEach(s => s.classList.remove('active'));
+        stars.forEach(s => {
+          if(s.getAttribute('data-value') <= value){
+            s.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // Clear button
+    document.getElementById('clearBtn').addEventListener('click', ()=>{
+      document.getElementById('feedbackForm').reset();
+      updateSection.classList.add('hidden');
+      document.getElementById('date').value = new Date().toLocaleDateString();
+      stars.forEach(s=>s.classList.remove('active'));
+      satisfactionInput.value = '';
+      hideToast();
+    });
+
+    // Simple client-side submit handler (replace with actual POST integration)
+    const form = document.getElementById('feedbackForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      // basic validation: Issue Name and resolved
+      const issueName = document.getElementById('issueName').value.trim();
+      const resolved = form.resolved && [...form.resolved].some(r=>r.checked);
+      if(!issueName){
+        showToast('Please enter the Issue Name.');
+        return;
+      }
+      if(!resolved){
+        showToast('Please select whether the issue was resolved.');
+        return;
+      }
+
+      // collect data
+      const data = {
+        issueName,
+        date: document.getElementById('date').value,
+        name: document.getElementById('name').value.trim() || null,
+        contact: document.getElementById('contact').value.trim() || null,
+        resolved: [...form.resolved].find(r=>r.checked).value,
+        satisfaction: satisfactionInput.value || null,
+        needsUpdate: needsUpdate.checked,
+        updates: document.getElementById('updates').value.trim() || null,
+        comments: document.getElementById('comments').value.trim() || null
+      };
+
+      // TODO: integrate with your backend endpoint (fetch POST to /api/feedback etc.)
+      console.log('Feedback submitted:', data);
+      showToast('Thank you — your feedback has been submitted.', true);
+      form.reset(); updateSection.classList.add('hidden'); document.getElementById('date').value = new Date().toLocaleDateString();
+      stars.forEach(s=>s.classList.remove('active'));
+      satisfactionInput.value = '';
+    });
+
+    function showToast(msg, success=false){
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.style.display='block';
+      t.style.borderColor = success ? '#bbf7d0' : '#fce7f3';
+      t.style.color = success ? 'var(--success)' : '#b91c1c';
+      setTimeout(()=>{ t.style.display='none'; }, 6000);
+    }
+    function hideToast(){ document.getElementById('toast').style.display='none'; }
+  </script>
+</body>
+</html>

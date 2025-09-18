@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7fb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0077b6;
+      color: #fff;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+
+    .about-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .about-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0077b6;
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .team-role {
+      background: #f0f9ff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #d6eaf8;
+      transition: transform 0.2s;
+    }
+
+    .team-role:hover {
+      transform: scale(1.03);
+    }
+
+    .team-role h3 {
+      margin: 0;
+      color: #005f87;
+      font-size: 1.2rem;
+    }
+
+    .team-role p {
+      margin: 5px 0 0;
+      font-size: 1rem;
+    }
+
+    .photo-placeholder {
+  margin-top: 30px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  color: #0077b6;
+  width: 90%;       
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-placeholder img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.back-btn {
+  margin: 20px;
+}
+
+.back-btn a {
+  display: inline-block;
+  text-decoration: none;
+  background: #0077b6;     
+  color: #fff;             
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn a:hover {
+  background: #005f87;     
+  transform: scale(1.05);  
+}
+
+.back-btn a:active {
+  background: #004466;     
+  transform: scale(0.98);
+}
+
+
+
+    @media(max-width: 600px) {
+      .team {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Us</h1>
+  </header>
+
+  <section class="about-section">
+    <h2>Our Team</h2>
+    <div class="team">
+      <div class="team-role">
+        <h3>Team Leader</h3>
+        <p>Akshat Prasanna Kumar</p>
+      </div>
+      <div class="team-role">
+        <h3>Co-Leader</h3>
+        <p>Shreyas Verma</p>
+      </div>
+      <div class="team-role">
+        <h3>Team Member</h3>
+        <p>Abhishek Kumar</p>
+      </div>
+      <div class="team-role">
+        <h3>Team Member</h3>
+        <p>Murli Gaurav</p>
+      </div>
+      <div class="team-role">
+        <h3>Team Member</h3>
+        <p>Kshitij Dongre</p>
+      </div>
+      <div class="team-role">
+        <h3>Team Member</h3>
+        <p>Aishwarya Srivastava</p>
+      </div>
+    </div>
+
+    <div class="photo-placeholder">
+      <img src="developersofcivicsense.jpg" alt="">
+    </div>
+    <div class="back-btn">
+            <a href="home.html">⬅ Back to Home</a>
+        </div>
+  </section>
+</body>
+</html>
